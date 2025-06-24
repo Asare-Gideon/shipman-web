@@ -1,0 +1,16 @@
+export const shippingAgents = [
+  { value: "dhl", label: "DHL" },
+  { value: "fedex", label: "FedEx" },
+  { value: "ups", label: "UPS" },
+  { value: "usps", label: "USPS" },
+  { value: "aramex", label: "Aramex" },
+  { value: "dpdgroup", label: "DPD Group" },
+  { value: "royalmail", label: "Royal Mail" },
+  { value: "canadapost", label: "Canada Post" },
+  { value: "australiapost", label: "Australia Post" },
+  { value: "chinapost", label: "China Post" },
+  { value: "japanpost", label: "Japan Post" },
+  { value: "postnord", label: "PostNord" },
+  { value: "gls", label: "GLS" },
+  { value: "tnt", label: "TNT" },
+]
