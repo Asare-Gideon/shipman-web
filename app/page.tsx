@@ -1,6 +1,7 @@
 import GlobeVisualizer from "@/components/globe/globe";
 import { FeaturesSection } from "@/components/home/features-section";
 import { HeroSection } from "@/components/home/hero-section";
+import HeroSection2 from "@/components/home/hero-section2";
 import { LogisticsShowcase } from "@/components/home/logistics-showcase";
 import { MobileAppSection } from "@/components/home/mobile-app-section";
 import { ServicesCarousel } from "@/components/home/services-carousel";
@@ -11,12 +12,13 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className=" min-h-screen bg-gradient-to-b from-white via-gray-100 to-gray-100 ">
+    <div className=" min-h-screen bg-gradient-to-b from-white via-gray-100 to-gray-100 overflow-x-hidden ">
       <div>
-        <HeroSection />
-        <FeaturesSection />
+        <HeroSection2 />
+        <div className="">
+          <SupportedCompaniesSection />
+        </div>
       </div>
-      <SupportedCompaniesSection />
       <div className="">
         <SliderSection />
       </div>

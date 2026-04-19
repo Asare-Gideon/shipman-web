@@ -448,7 +448,7 @@ const page = () => {
                             <p className="font-medium text-gray-900">
                               Office Address
                             </p>
-                            <p className="text-gray-700">Accra, Ghana</p>
+                            <p className="text-gray-700">Kumasi, Ghana</p>
                           </div>
                         </div>
                       </div>

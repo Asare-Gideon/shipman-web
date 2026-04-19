@@ -33,16 +33,14 @@ const slides = [
   },
   {
     id: 3,
-    title: "Customs Documentation Management",
+    title: "Agents Management System",
     description:
-      "Simplify your customs process with our digital documentation platform. Generate, store, and submit all required customs forms electronically.",
-    additionalText:
-      "Our compliance experts ensure your documentation meets all international regulations and standards.",
+      "Simplify agent operations with a centralized management system. Easily coordinate, monitor, and support agents while maintaining full visibility across your logistics network.",
     image: "/images/img-1.png",
     bgColor: "from-purple-200 to-purple-100",
     accentColor: "text-purple-600",
     buttonColor: "bg-purple-600",
-    highlightWords: ["digital documentation", "compliance experts"],
+    highlightWords: ["agent", "maintaining"],
   },
 ];
 
@@ -76,7 +74,7 @@ export function SliderSection() {
       highlightedText = highlightedText.replace(
         regex,
         (match) =>
-          `<span class="${slides[currentSlide].accentColor} font-semibold">${match}</span>`
+          `<span class="${slides[currentSlide].accentColor} font-semibold">${match}</span>`,
       );
     });
     return <span dangerouslySetInnerHTML={{ __html: highlightedText }} />;

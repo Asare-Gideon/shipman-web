@@ -345,60 +345,30 @@ export default function AboutPage(): JSX.Element {
   ];
 
   // Calculate how many testimonials to show based on screen size
-  const getTestimonialsPerView = (): number => {
-    if (typeof window !== "undefined") {
-      if (window.innerWidth >= 1024) return 3; // lg screens and up
-      if (window.innerWidth >= 768) return 2; // md screens
-      return 1; // sm screens and below
-    }
-    return 1;
-  };
-
-  const [testimonialsPerView, setTestimonialsPerView] = useState<number>(1);
-
-  useEffect(() => {
-    const updateTestimonialsPerView = (): void => {
-      setTestimonialsPerView(getTestimonialsPerView());
-    };
-
-    updateTestimonialsPerView();
-    window.addEventListener("resize", updateTestimonialsPerView);
-    return () =>
-      window.removeEventListener("resize", updateTestimonialsPerView);
-  }, []);
-
   // Auto-slide testimonials
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentTestimonialIndex((prev) => {
-        const maxIndex = Math.max(0, testimonials.length - testimonialsPerView);
-        return prev >= maxIndex ? 0 : prev + 1;
-      });
-    }, 5000); // Change every 5 seconds
+      setCurrentTestimonialIndex((prev) => (prev + 1) % testimonials.length);
+    }, 6000); // Change every 6 seconds
     return () => clearInterval(timer);
-  }, [testimonials.length, testimonialsPerView]);
+  }, [testimonials.length]);
 
   const nextTestimonial = (): void => {
-    const maxIndex = Math.max(0, testimonials.length - testimonialsPerView);
-    setCurrentTestimonialIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    setCurrentTestimonialIndex((prev) => (prev + 1) % testimonials.length);
   };
 
   const prevTestimonial = (): void => {
-    const maxIndex = Math.max(0, testimonials.length - testimonialsPerView);
-    setCurrentTestimonialIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
-  };
-
-  const goToTestimonial = (index: number): void => {
-    const maxIndex = Math.max(0, testimonials.length - testimonialsPerView);
-    setCurrentTestimonialIndex(Math.min(index, maxIndex));
+    setCurrentTestimonialIndex((prev) =>
+      prev === 0 ? testimonials.length - 1 : prev - 1,
+    );
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-white to-blue-50">
+    <div className="min-h-screen bg-gradient-to-br overflow-x-hidden from-blue-50 via-white to-blue-50">
       {/* Hero Section - Enhanced Mobile Responsiveness */}
       <section
         ref={heroRef}
-        className="relative py-12 sm:py-16 bg-white lg:py-24 xl:py-32 overflow-hidden"
+        className="relative py-12 sm:py-16 bg-white lg:py-24 xl:py-32 overflow-hidden mt-[2rem] md:mt-0"
       >
         {/* Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
@@ -453,7 +423,7 @@ export default function AboutPage(): JSX.Element {
                 visibility, and drive growth in the logistics industry.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8 justify-center lg:justify-start">
+              {/* <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8 justify-center lg:justify-start">
                 <motion.div
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -480,7 +450,7 @@ export default function AboutPage(): JSX.Element {
                     Meet Our Team
                   </Button>
                 </motion.div>
-              </div>
+              </div> */}
 
               {/* Quick Stats - Mobile Optimized */}
               <div className="grid grid-cols-3 gap-4 sm:gap-6 pt-6 sm:pt-8 border-t border-gray-200">
@@ -579,8 +549,11 @@ export default function AboutPage(): JSX.Element {
       </section>
 
       {/* Our Story Section - Mobile Optimized */}
-      <section ref={storyRef} className="py-12 sm:py-16 lg:py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <section
+        ref={storyRef}
+        className="py-12 sm:py-16 lg:py-20 bg-white overflow-x-hidden"
+      >
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={
@@ -609,7 +582,7 @@ export default function AboutPage(): JSX.Element {
                 isStoryInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }
               }
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="order-2 lg:order-1 relative h-[500px] w-full"
+              className="order-2 lg:order-1 relative h-[300px] md:h-[500px] w-full"
             >
               <Image
                 src="/images/about-story.jpg"
@@ -669,9 +642,9 @@ export default function AboutPage(): JSX.Element {
       {/* Values Section - Mobile Optimized */}
       <section
         ref={valuesRef}
-        className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-50 to-blue-50"
+        className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-50 to-blue-50 overflow-x-hidden"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={
@@ -733,120 +706,12 @@ export default function AboutPage(): JSX.Element {
         </div>
       </section>
 
-      {/* Team Section - Mobile Optimized */}
-      <section ref={teamRef} className="py-12 sm:py-16 lg:py-20 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={
-              isTeamInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-            }
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12 sm:mb-16"
-          >
-            <Badge className="mb-4 bg-purple-100 text-purple-800 hover:bg-purple-200">
-              <Users className="w-4 h-4 mr-2" />
-              Our Team
-            </Badge>
-            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
-              Meet the Visionaries
-            </h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              Our diverse team of experts brings together decades of experience
-              in logistics, technology, and customer success.
-            </p>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {teamMembers.map((member: TeamMember, index: number) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                animate={
-                  isTeamInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
-                }
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
-                className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-lg hover:shadow-2xl transition-all duration-500 group"
-              >
-                <div className="relative mb-6">
-                  <Image
-                    src={member.image || "/placeholder.svg"}
-                    alt={member.name}
-                    width={400}
-                    height={400}
-                    className="w-24 h-24 sm:w-32 sm:h-32 rounded-xl sm:rounded-2xl mx-auto object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  <div className="absolute -bottom-1 sm:-bottom-2 -right-1 sm:-right-2 w-6 h-6 sm:w-8 sm:h-8 bg-green-500 rounded-full border-2 sm:border-4 border-white" />
-                </div>
-
-                <div className="text-center mb-6">
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
-                    {member.name}
-                  </h3>
-                  <p className="text-blue-600 font-medium mb-3 text-sm sm:text-base">
-                    {member.position}
-                  </p>
-                  <p className="text-gray-600 text-xs sm:text-sm leading-relaxed">
-                    {member.bio}
-                  </p>
-                </div>
-
-                {/* Achievements */}
-                <div className="mb-6">
-                  <div className="flex flex-wrap gap-1 sm:gap-2 justify-center">
-                    {member.achievements.map(
-                      (achievement: string, i: number) => (
-                        <Badge key={i} variant="outline" className="text-xs">
-                          <Star className="w-2 h-2 sm:w-3 sm:h-3 mr-1" />
-                          <span className="hidden sm:inline">
-                            {achievement}
-                          </span>
-                          <span className="sm:hidden">
-                            {achievement.split(" ")[0]}
-                          </span>
-                        </Badge>
-                      )
-                    )}
-                  </div>
-                </div>
-
-                {/* Social Links */}
-                <div className="flex justify-center gap-3 sm:gap-4">
-                  <motion.a
-                    href={member.linkedin}
-                    whileHover={{ scale: 1.1 }}
-                    className="w-8 h-8 sm:w-10 sm:h-10 bg-blue-100 hover:bg-blue-500 text-blue-600 hover:text-white rounded-full flex items-center justify-center transition-all duration-300"
-                  >
-                    <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />
-                  </motion.a>
-                  <motion.a
-                    href={member.twitter}
-                    whileHover={{ scale: 1.1 }}
-                    className="w-8 h-8 sm:w-10 sm:h-10 bg-sky-100 hover:bg-sky-500 text-sky-600 hover:text-white rounded-full flex items-center justify-center transition-all duration-300"
-                  >
-                    <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />
-                  </motion.a>
-                  <motion.a
-                    href={`mailto:${member.email}`}
-                    whileHover={{ scale: 1.1 }}
-                    className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-100 hover:bg-gray-500 text-gray-600 hover:text-white rounded-full flex items-center justify-center transition-all duration-300"
-                  >
-                    <Mail className="w-4 h-4 sm:w-5 sm:h-5" />
-                  </motion.a>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Achievements Section - Mobile Optimized */}
       <section
         ref={achievementsRef}
-        className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-blue-600 to-teal-600 text-white"
+        className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-blue-600 to-teal-600 text-white overflow-x-hidden"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={
@@ -909,9 +774,9 @@ export default function AboutPage(): JSX.Element {
       {/* Multi-Testimonial Slider Section */}
       <section
         ref={testimonialsRef}
-        className="py-12 sm:py-16 lg:py-20 bg-white"
+        className="py-12 sm:py-16 lg:py-20 bg-white overflow-x-hidden"
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={
@@ -935,105 +800,93 @@ export default function AboutPage(): JSX.Element {
             </p>
           </motion.div>
 
-          {/* Multi-Testimonial Slider */}
-          <div className="relative max-w-7xl mx-auto">
-            <div className="overflow-hidden rounded-3xl">
+          {/* Single Card Carousel - Mobile Optimized */}
+          <div className="relative max-w-2xl mx-auto">
+            <div className="overflow-hidden">
               <motion.div
-                className="flex transition-transform duration-500 ease-in-out"
-                style={{
-                  transform: `translateX(-${
-                    currentTestimonialIndex * (100 / testimonialsPerView)
-                  }%)`,
-                  width: `${
-                    (testimonials.length / testimonialsPerView) * 100
-                  }%`,
-                }}
+                key={currentTestimonialIndex}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.4 }}
               >
-                {testimonials.map((testimonial: Testimonial, index: number) => (
-                  <div
-                    key={index}
-                    className="flex-shrink-0 px-2 sm:px-4"
-                    style={{ width: `${100 / testimonialsPerView}%` }}
-                  >
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ duration: 0.5 }}
-                      className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-lg h-full flex flex-col"
-                    >
-                      {/* Rating Stars */}
-                      <div className="flex justify-center mb-4">
-                        {[...Array(testimonial.rating)].map((_, i: number) => (
-                          <Star
-                            key={i}
-                            className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-400 fill-current"
-                          />
-                        ))}
-                      </div>
-
-                      <Quote className="w-6 h-6 sm:w-8 sm:h-8 text-blue-500 mx-auto mb-4" />
-
-                      <p className="text-sm sm:text-base lg:text-lg text-gray-700 mb-6 leading-relaxed italic text-center flex-grow">
-                        "{testimonial.quote}"
-                      </p>
-
-                      <div className="flex items-center justify-center gap-3 mt-auto">
-                        <Image
-                          src={testimonial.image || "/placeholder.svg"}
-                          alt={testimonial.author}
-                          width={80}
-                          height={80}
-                          className="w-10 h-10 sm:w-12 sm:h-12 rounded-full object-cover flex-shrink-0"
+                {testimonials[currentTestimonialIndex] && (
+                  <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-md sm:shadow-lg">
+                    {/* Rating Stars */}
+                    <div className="flex justify-center mb-6">
+                      {[
+                        ...Array(testimonials[currentTestimonialIndex].rating),
+                      ].map((_, i: number) => (
+                        <Star
+                          key={i}
+                          className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400 fill-current"
                         />
-                        <div className="text-center sm:text-left min-w-0">
-                          <h4 className="font-semibold text-gray-900 text-sm sm:text-base truncate">
-                            {testimonial.author}
-                          </h4>
-                          <p className="text-xs sm:text-sm text-gray-600 truncate">
-                            {testimonial.position}
-                          </p>
-                          <p className="text-xs sm:text-sm text-blue-600 font-medium truncate">
-                            {testimonial.company}
-                          </p>
-                        </div>
+                      ))}
+                    </div>
+
+                    <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-blue-500 mx-auto mb-6" />
+
+                    <p className="text-base sm:text-lg lg:text-xl text-gray-700 mb-8 leading-relaxed italic text-center min-h-32 sm:min-h-40 flex items-center justify-center">
+                      "{testimonials[currentTestimonialIndex].quote}"
+                    </p>
+
+                    <div className="flex flex-col items-center gap-4">
+                      <Image
+                        src={
+                          testimonials[currentTestimonialIndex].image ||
+                          "/placeholder.svg"
+                        }
+                        alt={testimonials[currentTestimonialIndex].author}
+                        width={80}
+                        height={80}
+                        className="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-cover"
+                      />
+                      <div className="text-center">
+                        <h4 className="font-semibold text-gray-900 text-base sm:text-lg">
+                          {testimonials[currentTestimonialIndex].author}
+                        </h4>
+                        <p className="text-sm sm:text-base text-gray-600">
+                          {testimonials[currentTestimonialIndex].position}
+                        </p>
+                        <p className="text-sm sm:text-base text-blue-600 font-medium">
+                          {testimonials[currentTestimonialIndex].company}
+                        </p>
                       </div>
-                    </motion.div>
+                    </div>
                   </div>
-                ))}
+                )}
               </motion.div>
             </div>
 
             {/* Navigation Buttons */}
             <button
               onClick={prevTestimonial}
-              className="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white shadow-lg rounded-full flex items-center justify-center text-gray-600 hover:text-blue-600 hover:shadow-xl transition-all duration-300 z-10"
-              aria-label="Previous testimonials"
+              className="absolute left-0 sm:-left-16 top-1/2 transform -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white shadow-lg rounded-full flex items-center justify-center text-gray-600 hover:text-blue-600 hover:shadow-xl transition-all duration-300 z-10"
+              aria-label="Previous testimonial"
             >
               <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
 
             <button
               onClick={nextTestimonial}
-              className="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white shadow-lg rounded-full flex items-center justify-center text-gray-600 hover:text-blue-600 hover:shadow-xl transition-all duration-300 z-10"
-              aria-label="Next testimonials"
+              className="absolute right-0 sm:-right-16 top-1/2 transform -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 bg-white shadow-lg rounded-full flex items-center justify-center text-gray-600 hover:text-blue-600 hover:shadow-xl transition-all duration-300 z-10"
+              aria-label="Next testimonial"
             >
               <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
             </button>
 
             {/* Dots Indicator */}
-            <div className="flex justify-center gap-2 mt-8">
-              {Array.from({
-                length: Math.ceil(testimonials.length / testimonialsPerView),
-              }).map((_, index: number) => (
+            <div className="flex justify-center gap-2 sm:gap-3 mt-8 sm:mt-10">
+              {testimonials.map((_, index: number) => (
                 <button
                   key={index}
-                  onClick={() => goToTestimonial(index)}
-                  className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
+                  onClick={() => setCurrentTestimonialIndex(index)}
+                  className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                     index === currentTestimonialIndex
-                      ? "bg-blue-600 w-6 sm:w-8"
+                      ? "bg-blue-600 w-8"
                       : "bg-gray-300 hover:bg-gray-400"
                   }`}
-                  aria-label={`Go to testimonial group ${index + 1}`}
+                  aria-label={`Go to testimonial ${index + 1}`}
                 />
               ))}
             </div>
@@ -1041,91 +894,9 @@ export default function AboutPage(): JSX.Element {
         </div>
       </section>
 
-      {/* Global Offices Section - Mobile Optimized */}
-      <section
-        ref={officesRef}
-        className="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-gray-50 to-blue-50"
-      >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={
-              isOfficesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }
-            }
-            transition={{ duration: 0.8 }}
-            className="text-center mb-12 sm:mb-16"
-          >
-            <Badge className="mb-4 bg-teal-100 text-teal-800 hover:bg-teal-200">
-              <MapPin className="w-4 h-4 mr-2" />
-              Global Presence
-            </Badge>
-            <h2 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-gray-900 mb-4 sm:mb-6">
-              Our Offices Worldwide
-            </h2>
-            <p className="text-lg sm:text-xl text-gray-600 max-w-3xl mx-auto">
-              With offices across major logistics hubs, we're always close to
-              our clients and partners.
-            </p>
-          </motion.div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            {offices.map((office: Office, index: number) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 50 }}
-                animate={
-                  isOfficesInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }
-                }
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
-                className="bg-white rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 group"
-              >
-                <div className="relative">
-                  <Image
-                    src={office.image || "/placeholder.svg"}
-                    alt={`${office.city} Office`}
-                    width={400}
-                    height={300}
-                    className="w-full h-32 sm:h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
-                  {office.isHeadquarters && (
-                    <Badge className="absolute top-2 sm:top-4 left-2 sm:left-4 bg-blue-600 text-white text-xs">
-                      <Building className="w-2 h-2 sm:w-3 sm:h-3 mr-1" />
-                      HQ
-                    </Badge>
-                  )}
-                </div>
-
-                <div className="p-4 sm:p-6">
-                  <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">
-                    {office.city}, {office.country}
-                  </h3>
-                  <p className="text-gray-600 text-xs sm:text-sm mb-4 leading-relaxed">
-                    {office.address}
-                  </p>
-
-                  <div className="space-y-2">
-                    <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
-                      <div className="w-3 h-3 sm:w-4 sm:h-4 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-blue-600 rounded-full" />
-                      </div>
-                      <span className="truncate">{office.phone}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
-                      <Mail className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600 flex-shrink-0" />
-                      <span className="truncate">{office.email}</span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section - Mobile Optimized */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-gray-900 to-blue-900 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-12 sm:py-16 lg:py-20 bg-gradient-to-r from-gray-900 to-blue-900 text-white overflow-x-hidden">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}

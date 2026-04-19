@@ -9,9 +9,26 @@ const services = [
   {
     id: 1,
     number: "01",
-    title: "Rail Freight",
+    title: "Shipping Agents",
     description:
-      "Logistic service involves of implementation and control of the efficient",
+      "Providing smart IT solutions that empower shipping agents to streamline operations and deliver efficiently.",
+    icon: "/images/airport.png",
+  },
+  {
+    id: 3,
+    number: "03",
+    title: "Importers",
+    description:
+      "Seamless IT solutions that empower importers to track shipments, manage processes, and ensure timely delivery.",
+    icon: "/images/fast-delivery.png",
+  },
+
+  {
+    id: 4,
+    number: "04",
+    title: "Sea Freight ",
+    description:
+      "Reliable sea freight tracking solutions that give real-time visibility and control over your shipments from port to destination.",
     icon: "/images/airport.png",
   },
   {
@@ -19,31 +36,16 @@ const services = [
     number: "02",
     title: "Air Freight",
     description:
-      "Logistic service involves of implementation and control of the efficient",
+      "Fast and accurate air freight tracking solutions that give you real-time updates and full visibility on every shipment.",
     icon: "/images/airplane.png",
   },
-  {
-    id: 3,
-    number: "03",
-    title: "Road Freight",
-    description:
-      "Logistic service involves of implementation and control of the efficient",
-    icon: "/images/fast-delivery.png",
-  },
-  {
-    id: 4,
-    number: "04",
-    title: "Ship Freight",
-    description:
-      "Logistic service involves of implementation and control of the efficient",
-    icon: "/images/airport.png",
-  },
+
   {
     id: 5,
     number: "05",
     title: "Warehouse",
     description:
-      "Logistic service involves of implementation and control of the efficient",
+      "Efficient warehousing solutions that ensure secure storage, accurate inventory management, and smooth order fulfillment",
     icon: "/images/warehouse.png",
   },
 ];
@@ -110,7 +112,7 @@ export function ServicesCarousel() {
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-cyan-500 font-medium text-xs sm:text-sm tracking-wider uppercase mb-2">
-                  LATEST SERVICE
+                  LATEST TOOLS
                 </p>
                 <h2 className="text-2xl sm:text-3xl font-bold">
                   Service We <span className="text-gray-500">Provide</span>
@@ -245,7 +247,7 @@ export function ServicesCarousel() {
               <div className="flex items-center justify-between mb-12">
                 <div>
                   <p className="text-cyan-500 font-medium text-sm tracking-wider uppercase mb-2">
-                    LATEST SERVICE
+                    LATEST TOOLS
                   </p>
                   <h2 className="text-4xl md:text-5xl font-bold">
                     Service We <span className="text-gray-500">Provide</span>

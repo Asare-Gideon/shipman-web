@@ -111,7 +111,7 @@ export function MobileAppSection() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-4xl md:text-5xl lg:text-5xl font-bold text-white leading-tight"
               >
-                Be even faster with our mobile app
+                Manage Your Imports Faster with Our Mobile App
               </motion.h2>
 
               {/* QR Code - Increased Size */}

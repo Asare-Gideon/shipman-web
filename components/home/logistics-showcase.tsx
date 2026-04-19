@@ -73,8 +73,7 @@ export function LogisticsShowcase() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-2xl md:text-4xl lg:text-4xl font-bold text-white leading-tight"
               >
-                Delivering Success The Through Logistics Journey With Us Your
-                Trusted
+                Delivering Success Through Seamless Logistics
               </motion.h2>
 
               {/* Statistics */}
@@ -187,7 +186,7 @@ export function LogisticsShowcase() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-2xl md:text-3xl font-bold text-white"
               >
-                Transportation Is Crucial
+                Door-to-Door Solutions
               </motion.h3>
 
               {/* Description */}
@@ -201,10 +200,10 @@ export function LogisticsShowcase() {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="text-gray-300 leading-relaxed"
               >
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Repellat, asperiores quaerat dolor consequuntur perferendis quo
-                officia optio ipsum error sint id itaque nesciunt, odio eius
-                quos.
+                We handle your goods from pickup to final destination with
+                speed, care, and reliability. Our door-to-door service
+                eliminates hassle, ensuring your goods arrive safely and on
+                time—every time
               </motion.p>
             </div>
           </motion.div>
@@ -230,8 +229,7 @@ export function LogisticsShowcase() {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="text-2xl md:text-3xl font-bold text-[#12151d] leading-tight"
               >
-                Transporting With Care And Efficiency Where Every Ride Feels
-                Like Home
+                Effortless, Secure Delivery from Pickup to Final Destination
               </motion.h3>
 
               {/* Description  */}
@@ -245,10 +243,10 @@ export function LogisticsShowcase() {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="text-gray-600 leading-relaxed"
               >
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Repellat, asperiores quaerat dolor consequuntur perferendis quo
-                officia optio ipsum error sint id itaque nesciunt, odio eius
-                quos.
+                From collection to final delivery, we provide seamless
+                door-to-door logistics you can rely on. No delays, no
+                complications—just efficient, secure delivery straight to your
+                destination.
               </motion.p>
 
               {/* Features List */}

@@ -11,17 +11,17 @@ export function WhyChooseUsSection() {
   const advantages = [
     {
       icon: Globe,
-      title: "Global Network",
+      title: "Robust System",
       description:
-        "Extensive worldwide coverage with partners in over 190+ countries for seamless international shipping and logistics solutions.",
+        "A robust, all-in-one platform designed to empower freight forwarders, shipping agents, and importers with seamless operations, real-time visibility, and efficient cargo management across the entire supply chain.",
       color: "from-blue-500 to-blue-600",
       delay: 0.1,
     },
     {
       icon: Clock,
-      title: "Real-Time Tracking",
+      title: "Ecosystem Powering Modern Logistics",
       description:
-        "Advanced tracking technology providing live updates and precise delivery estimates with 24/7 monitoring capabilities.",
+        "Our unified system combines advanced tools, real-time coordination, and strategic processes to deliver faster, smarter, and more dependable logistics solutions.",
       color: "from-purple-500 to-purple-600",
       delay: 0.2,
     },
@@ -129,9 +129,10 @@ export function WhyChooseUsSection() {
             Ready to Experience the Difference?
           </h3>
           <p className="text-gray-600 text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
-            Join thousands of satisfied customers who trust us with their
-            logistics needs. Get started today and see why we're the preferred
-            choice for businesses worldwide.
+            Trusted by businesses across industries, we deliver logistics
+            solutions built on efficiency, precision, and reliability. Be part
+            of a system designed to move your operations forward. Get started
+            as:
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <motion.button
@@ -139,14 +140,14 @@ export function WhyChooseUsSection() {
               whileTap={{ scale: 0.95 }}
               className="px-10 py-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors duration-300 shadow-lg hover:shadow-xl text-lg"
             >
-              Get Started Now
+              Shipping Agent
             </motion.button>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-10 py-4 bg-white hover:bg-gray-50 text-blue-600 font-semibold rounded-xl border-2 border-blue-600 transition-colors duration-300 text-lg"
             >
-              Contact Sales
+              An Importer
             </motion.button>
           </div>
         </motion.div>

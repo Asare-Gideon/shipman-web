@@ -13,14 +13,15 @@ export function SupportedCompaniesSection() {
     { name: "DHL", logo: "/images/sl1.png" },
     { name: "FedEx", logo: "/images/sl4.png" },
     { name: "UPS", logo: "/images/sl3.png" },
-    { name: "Amazon", logo: "/images/sl2.png" },
+    { name: "Ghana Shippers", logo: "/images/gsp_logo.png" },
     { name: "Maersk", logo: "/images/sl3.png" },
     { name: "TNT", logo: "/images/sl2.png" },
-    { name: "Aramex", logo: "/images/sl3.png" },
-    { name: "COSCO", logo: "/images/sl4.png" },
+    { name: "Hubtel", logo: "/images/hubtel.png" },
+    { name: "Ghana Shippers", logo: "/images/gsp_logo.png" },
     { name: "MSC", logo: "/images/sl3.png" },
     { name: "CMA CGM", logo: "/images/sl2.png" },
     { name: "Hapag-Lloyd", logo: "/images/sl2.png" },
+    { name: "Hubtel", logo: "/images/hubtel.png" },
     { name: "OOCL", logo: "/images/sl2.png" },
   ];
 
@@ -42,16 +43,17 @@ export function SupportedCompaniesSection() {
         >
           <div className="inline-flex items-center justify-center px-4 py-2 bg-gray-50 rounded-full mb-4">
             <span className="text-gray-600 font-medium text-sm tracking-wider uppercase">
-              Trusted Partners
+              Partnering Excellence
             </span>
           </div>
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Supported by <span className="text-blue-600">Industry Leaders</span>
+            Driving Logistics with{" "}
+            <span className="text-blue-600">Industry Leaders</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          {/* <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             We work with the world's leading logistics and shipping companies to
             provide you with the best service
-          </p>
+          </p> */}
         </motion.div>
 
         {/* Scrolling Companies Container */}
